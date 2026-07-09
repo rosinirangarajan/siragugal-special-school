@@ -1,0 +1,170 @@
+.donation-hero {
+  padding: 100px 5% 60px 5%;
+  background: linear-gradient(135deg, rgba(46, 134, 222, 0.08) 0%, rgba(111, 207, 151, 0.05) 100%);
+  text-align: center;
+}
+
+.donation-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.donation-hero p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.donation-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Impact text blocks */
+.impact-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.impact-text p {
+  font-size: 1.05rem;
+  color: var(--color-gray);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.impact-summary-card {
+  padding: 40px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  border-left: 5px solid var(--color-primary);
+}
+
+.impact-summary-card h4 {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.impact-summary-card p {
+  font-size: 1rem;
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+.reg-id {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gray);
+  background: var(--color-light-gray);
+  padding: 8px 16px;
+  border-radius: var(--border-radius-sm);
+  align-self: flex-start;
+}
+
+/* Sponsor grid */
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.sponsor-card {
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sponsor-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.sponsor-card p {
+  color: var(--color-gray);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.sponsor-amount {
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: rgba(46, 134, 222, 0.08);
+  color: var(--color-primary);
+  padding: 6px 12px;
+  border-radius: 30px;
+  align-self: flex-start;
+}
+
+/* Payment placeholders */
+.payment-placeholders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.payment-card {
+  padding: 40px 30px;
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.payment-icon {
+  font-size: 2.5rem;
+  background: rgba(46, 134, 222, 0.08);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.payment-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: rgba(86, 204, 242, 0.15);
+  padding: 4px 12px;
+  border-radius: 30px;
+}
+
+.placeholder-desc {
+  font-size: 0.9rem;
+  color: var(--color-gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .payment-placeholders-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 40px auto 0 auto;
+  }
+}

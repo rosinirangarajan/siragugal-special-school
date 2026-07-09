@@ -1,0 +1,206 @@
+/* About Hero Section */
+.about-hero {
+  padding: 100px 5% 60px 5%;
+  background: linear-gradient(135deg, rgba(46, 134, 222, 0.08) 0%, rgba(86, 204, 242, 0.05) 100%);
+  text-align: center;
+}
+
+.about-hero-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.about-hero p {
+  font-size: 1.1rem;
+  color: var(--color-gray);
+}
+
+.about-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* History block */
+.history-text {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.history-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.history-text p {
+  font-size: 1.05rem;
+  color: var(--color-gray);
+  line-height: 1.8;
+}
+
+.disorder-grid-wrapper {
+  margin-top: 20px;
+}
+
+.disorder-grid-wrapper h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.disorder-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.disorder-tag {
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid rgba(46, 134, 222, 0.15);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Mission & Vision */
+.mv-card {
+  padding: 40px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.mv-icon {
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+.mv-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.mv-card p {
+  color: var(--color-gray);
+  line-height: 1.7;
+}
+
+/* Core Values grid */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.value-card {
+  padding: 30px;
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid var(--color-primary);
+}
+
+.value-card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  font-size: 0.95rem;
+  color: var(--color-gray);
+}
+
+/* Structure diagram flow styles */
+.structure-flow {
+  max-width: 800px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.flow-node {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 14px 28px;
+  border-radius: var(--border-radius-md);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: center;
+  box-shadow: var(--shadow-subtle);
+  min-width: 200px;
+}
+
+.flow-node.highlight {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(46, 134, 222, 0.02);
+}
+
+.flow-node.highlight-parents {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(111, 207, 151, 0.02);
+}
+
+.flow-arrow {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.flow-row-node {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flow-sub-node {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 10px 20px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-subtle);
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .about-hero h1 {
+    font-size: 2.2rem;
+  }
+}
