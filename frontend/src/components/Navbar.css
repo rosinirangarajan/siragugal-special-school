@@ -32,17 +32,12 @@
   gap: 12px;
 }
 
-.navbar-logo-icon {
-  background: var(--color-accent); /* Accent Red */
-  color: var(--color-white);
-  font-weight: 700;
-  font-size: 1.4rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.navbar-logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .navbar-title-wrapper {

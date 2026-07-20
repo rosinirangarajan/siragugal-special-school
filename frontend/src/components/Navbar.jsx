@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import logoImg from '../assets/logo/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -28,14 +29,18 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo-container">
-          <div className="navbar-logo-icon">S</div>
+          <img
+            src={logoImg}
+            alt="Siragugal Special School Logo"
+            className="navbar-logo-img"
+          />
           <div className="navbar-title-wrapper">
             <span className="school-name">Siragugal</span>
             <span className="parent-org">PEACE TRUST</span>
           </div>
         </Link>
 
-        {/* Desktop Menu - Keep only required pages */}
+        {/* Desktop Menu */}
         <ul className="nav-menu">
           <li><NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink></li>

@@ -1,12 +1,30 @@
+/* ═══════════════════════════════════════════════════════
+   HOME PAGE STYLES — Siragugal Special School
+   ═══════════════════════════════════════════════════════ */
+
 .home-page {
   overflow: hidden;
   background-color: var(--color-bg);
 }
 
-/* Hero Section */
+/* ── Fade-in on scroll ────────────────────────────────── */
+.fade-in-element {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════
+   HERO SECTION
+   ══════════════════════════════════════════════════════ */
 .hero-section {
   padding: 80px 5% 60px 5%;
-  background: var(--color-bg); /* Brand Off-White #FAFAF8 */
+  background: linear-gradient(175deg, #FAFAF8 0%, #FFF9F0 100%);
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
@@ -30,7 +48,7 @@
 }
 
 .badge {
-  background-color: var(--color-accent-tint); /* Golden Tint #FDF3D9 */
+  background-color: var(--color-accent-tint);
   color: var(--color-text);
   padding: 6px 16px;
   font-size: 0.85rem;
@@ -43,17 +61,17 @@
 .hero-title {
   font-size: 3.5rem;
   font-weight: 800;
-  color: var(--color-text); /* #1E1E1E */
+  color: var(--color-text);
   line-height: 1.15;
 }
 
 .text-highlight {
-  color: var(--color-accent); /* Accent Red #C81E2C */
+  color: var(--color-accent);
 }
 
 .hero-description {
   font-size: 1.1rem;
-  color: var(--color-text-muted); /* Wing Grey #8A8D91 */
+  color: var(--color-text-muted);
   line-height: 1.7;
   max-width: 550px;
 }
@@ -64,79 +82,70 @@
   margin-top: 10px;
 }
 
-/* Slider Section */
+/* ── Hero Image Slider ────────────────────────────────── */
 .hero-slider-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1000px;
 }
 
-.slider-card {
+.hero-image-slider {
   width: 100%;
-  max-width: 450px;
-  height: 380px;
-  border-radius: var(--border-radius-lg);
-  padding: 40px;
-  color: var(--color-white);
-  display: flex;
-  align-items: flex-end;
-  position: relative;
+  max-width: 480px;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(30, 30, 30, 0.05);
-  transition: var(--transition-smooth);
-}
-
-.slider-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.slider-card-content {
   position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  box-shadow: 0 20px 50px rgba(30, 30, 30, 0.10),
+              0 4px 12px rgba(200, 30, 44, 0.06);
 }
 
-.slider-card-content h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
+.hero-slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  will-change: opacity;
 }
 
-.slider-card-content p {
-  font-size: 0.95rem;
-  opacity: 0.95;
-  line-height: 1.5;
-  margin-bottom: 20px;
+.hero-slide-img.active {
+  opacity: 1;
 }
 
-.slider-indicator-group {
+.hero-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 8px;
+  z-index: 3;
 }
 
-.indicator-dot {
+.hero-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  transition: var(--transition-smooth);
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  padding: 0;
 }
 
-.indicator-dot.active {
-  background: var(--color-white);
-  width: 24px;
+.hero-dot.active {
+  background: #FFFFFF;
+  width: 22px;
   border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* Stats Counter Section */
+/* ══════════════════════════════════════════════════════
+   STATS COUNTER SECTION
+   ══════════════════════════════════════════════════════ */
 .stats-section {
   padding: 40px 5%;
   background-color: var(--color-white);
@@ -152,17 +161,23 @@
 }
 
 .stat-card {
-  padding: 30px;
+  padding: 32px 24px;
   border-radius: var(--border-radius-md);
   text-align: center;
   border: 1px solid var(--color-border);
-  background: var(--color-bg); /* Off-white card backdrop */
+  background: var(--color-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(30, 30, 30, 0.06);
 }
 
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--color-accent); /* Accent Red */
+  color: var(--color-accent);
   margin-bottom: 4px;
 }
 
@@ -174,7 +189,9 @@
   letter-spacing: 0.5px;
 }
 
-/* Intro Preview Section */
+/* ══════════════════════════════════════════════════════
+   WHO WE ARE — INTRO PREVIEW
+   ══════════════════════════════════════════════════════ */
 .intro-preview {
   background-color: var(--color-bg);
 }
@@ -217,26 +234,34 @@
   margin-top: 10px;
 }
 
-.intro-feature-grid {
+/* School building image on the right */
+.intro-image-block {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  justify-content: center;
+  align-items: center;
 }
 
-.feature-item {
-  padding: 24px;
-  border-radius: var(--border-radius-md);
-  background: var(--color-white);
+.intro-school-img {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 12px 36px rgba(30, 30, 30, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.feature-item h4 {
-  font-size: 1.2rem;
-  color: var(--color-accent);
-  margin-bottom: 8px;
-  font-weight: 600;
+.intro-school-img:hover {
+  transform: scale(1.015);
+  box-shadow: 0 16px 44px rgba(30, 30, 30, 0.12);
 }
 
-/* Facilities Grid */
+/* ══════════════════════════════════════════════════════
+   FACILITIES SECTION
+   ══════════════════════════════════════════════════════ */
+.facilities-section {
+  background-color: var(--color-white);
+}
+
 .facilities-grid {
   width: 90%;
   max-width: 1200px;
@@ -249,15 +274,21 @@
 .facility-card {
   padding: 30px;
   border-radius: var(--border-radius-md);
-  background: var(--color-white);
+  background: var(--color-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facility-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(30, 30, 30, 0.07);
 }
 
 .facility-icon {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--color-accent-tint); /* Golden tint backdrop */
-  color: var(--color-accent); /* Accent Red icon */
+  background: var(--color-accent-tint);
+  color: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,9 +307,85 @@
 .facility-card p {
   color: var(--color-text-muted);
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
-/* CTA Banner Section */
+/* ══════════════════════════════════════════════════════
+   LIFE AT SIRAGUGAL SECTION
+   ══════════════════════════════════════════════════════ */
+.life-section {
+  background-color: var(--color-bg);
+}
+
+.life-grid {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.life-card-inner {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 6px 20px rgba(30, 30, 30, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: default;
+}
+
+.life-card-inner:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(30, 30, 30, 0.13);
+}
+
+.life-card-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.life-card-inner:hover img {
+  transform: scale(1.05);
+}
+
+.life-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.life-card-overlay h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.life-card-overlay p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.life-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ══════════════════════════════════════════════════════
+   CTA BANNER (DONATION) SECTION
+   ══════════════════════════════════════════════════════ */
 .cta-banner-section {
   padding: 60px 5% 100px 5%;
   background-color: var(--color-bg);
@@ -288,7 +395,7 @@
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #222222 0%, #111111 100%); /* Ink dark background */
+  background: linear-gradient(135deg, #222222 0%, #111111 100%);
   border-radius: var(--border-radius-lg);
   padding: 60px 40px;
   text-align: center;
@@ -326,27 +433,29 @@
   margin-top: 10px;
 }
 
-/* Responsive queries */
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════ */
 @media (max-width: 992px) {
   .hero-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .hero-content {
     align-items: center;
     text-align: center;
   }
-  
+
   .hero-description {
     max-width: 100%;
   }
-  
+
   .hero-slider-wrapper {
     max-width: 100%;
   }
-  
-  .slider-card {
+
+  .hero-image-slider {
     max-width: 100%;
   }
 
@@ -358,22 +467,30 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
+
+  .life-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 576px) {
   .hero-title {
     font-size: 2.4rem;
   }
-  
+
   .stats-container {
     grid-template-columns: 1fr;
   }
-  
+
+  .life-grid {
+    grid-template-columns: 1fr;
+  }
+
   .cta-actions {
     flex-direction: column;
     width: 100%;
   }
-  
+
   .cta-actions a {
     width: 100%;
     justify-content: center;
