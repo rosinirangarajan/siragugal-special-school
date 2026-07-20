@@ -20,7 +20,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on page navigation
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
@@ -36,14 +35,12 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Desktop Menu */}
+        {/* Desktop Menu - Keep only required pages */}
         <ul className="nav-menu">
           <li><NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink></li>
           <li><NavLink to="/activities" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Activities</NavLink></li>
-          <li><NavLink to="/staff" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Staff</NavLink></li>
           <li><NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Courses</NavLink></li>
-          <li><NavLink to="/gallery" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Gallery</NavLink></li>
           <li><NavLink to="/donation" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Donation</NavLink></li>
           <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Contact</NavLink></li>
         </ul>
@@ -66,9 +63,7 @@ const Navbar = () => {
           <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
           <li><Link to="/about" onClick={() => setIsOpen(false)}>About Us</Link></li>
           <li><Link to="/activities" onClick={() => setIsOpen(false)}>Activities</Link></li>
-          <li><Link to="/staff" onClick={() => setIsOpen(false)}>Staff</Link></li>
           <li><Link to="/courses" onClick={() => setIsOpen(false)}>Courses & Programs</Link></li>
-          <li><Link to="/gallery" onClick={() => setIsOpen(false)}>Gallery</Link></li>
           <li><Link to="/donation" onClick={() => setIsOpen(false)}>Donation</Link></li>
           <li><Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
           <li className="mobile-cta-item">

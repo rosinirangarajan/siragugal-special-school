@@ -1,22 +1,20 @@
-/* Design system variables and baseline utility styles */
+/* Brand Color Strategy & CSS Variables */
 :root {
-  --color-primary: #2E86DE;
-  --color-primary-rgb: 46, 134, 222;
-  --color-secondary: #56CCF2;
-  --color-secondary-rgb: 86, 204, 242;
-  --color-accent: #6FCF97;
-  --color-background: #F8FCFF;
+  --color-bg: #FAFAF8;            /* Brand Off-White background */
+  --color-text: #1E1E1E;          /* Ink Text (High contrast, readable) */
+  --color-text-muted: #8A8D91;    /* Wing Grey (Brand neutral for secondary text) */
+  --color-accent: #C81E2C;        /* Accent Red (Actionable interactive color) */
+  --color-accent-tint: #FDF3D9;   /* Gold Tint (Subtle highlights, cards, badges) */
+  --color-gold: #F5C518;          /* Accent Gold (Used sparingly for stars/decorations) */
+  
   --color-white: #FFFFFF;
-  --color-text: #1F2937;
-  --color-gray: #6B7280;
-  --color-light-gray: #F3F4F6;
-  --color-border: #E5E7EB;
+  --color-border: rgba(138, 141, 145, 0.15); /* Semi-transparent Wing Grey for elegant borders */
   
   --font-main: 'Poppins', sans-serif;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --shadow-subtle: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-premium: 0 20px 25px -5px rgba(46, 134, 222, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-subtle: 0 4px 12px rgba(30, 30, 30, 0.02);
+  --shadow-medium: 0 10px 20px rgba(30, 30, 30, 0.04);
+  --shadow-premium: 0 20px 30px rgba(200, 30, 44, 0.05);
   
   --border-radius-sm: 8px;
   --border-radius-md: 16px;
@@ -31,7 +29,7 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--color-background);
+  background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -55,18 +53,13 @@ button {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; opacity: 0; }
+  from { opacity: 0; }
   to { opacity: 1; }
 }
 
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseSoft {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.95; }
 }
 
 .animate-fade-in {
@@ -77,32 +70,29 @@ button {
   animation: slideUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* Premium CSS Utilities */
+/* Elegant Theme Cards */
 .glass-card {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-subtle);
-}
-
-.glass-card-hover {
   transition: var(--transition-smooth);
 }
 
 .glass-card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-premium);
-  border-color: rgba(46, 134, 222, 0.2);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-medium);
+  border-color: rgba(200, 30, 44, 0.2);
 }
 
+/* Redesigned Theme Buttons */
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #2574c4 100%);
+  background-color: var(--color-accent); /* Actionable Red */
   color: var(--color-white);
   padding: 12px 28px;
   font-weight: 600;
-  border-radius: var(--border-radius-md);
-  box-shadow: 0 4px 14px rgba(46, 134, 222, 0.3);
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(200, 30, 44, 0.15);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -110,24 +100,24 @@ button {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 134, 222, 0.4);
+  box-shadow: 0 6px 20px rgba(200, 30, 44, 0.25);
+  opacity: 0.95;
 }
 
 .btn-secondary {
-  background: var(--color-white);
-  color: var(--color-primary);
-  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-gold); /* Gold boundary */
   padding: 12px 28px;
   font-weight: 600;
-  border-radius: var(--border-radius-md);
+  border-radius: 50px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
 
 .btn-secondary:hover {
-  background: var(--color-light-gray);
-  border-color: var(--color-primary);
+  background: var(--color-accent-tint); /* Golden tint fill */
   transform: translateY(-2px);
 }
 
@@ -155,14 +145,14 @@ button {
   display: block;
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background: var(--color-accent); /* Neutral/Red minimal bar */
   margin: 12px auto 0 auto;
   border-radius: 2px;
 }
 
 .section-subtitle {
   text-align: center;
-  color: var(--color-gray);
+  color: var(--color-text-muted);
   max-width: 600px;
   margin: 0 auto 50px auto;
   font-size: 1.1rem;
@@ -174,14 +164,14 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(46, 134, 222, 0.3);
+  background: rgba(138, 141, 145, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--color-text-muted);
 }

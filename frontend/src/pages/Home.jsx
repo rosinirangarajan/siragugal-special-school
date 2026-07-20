@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './Home.jsx'; // self reference path is fine, let's use Home.css
 import './Home.css';
 
 const Home = () => {
@@ -8,17 +7,17 @@ const Home = () => {
     {
       title: "Interactive Special Classrooms",
       description: "Tailored educational pathways that adapt to every child's unique pace and style of learning.",
-      color: "linear-gradient(135deg, #2E86DE, #56CCF2)"
+      color: "linear-gradient(135deg, #C81E2C, #F5C518)" /* Accent Red to Accent Gold */
     },
     {
       title: "Multidisciplinary Therapies",
       description: "Speech, Occupational, and Physiotherapies integrated to support complete physical and vocal growth.",
-      color: "linear-gradient(135deg, #7F53AC, #647DEE)"
+      color: "linear-gradient(135deg, #8A8D91, #C81E2C)" /* Wing Grey to Accent Red */
     },
     {
       title: "Early Intervention Programs",
       description: "Identifying and supporting developmental delays early to enable future independence and confidence.",
-      color: "linear-gradient(135deg, #11998e, #38ef7d)"
+      color: "linear-gradient(135deg, #F5C518, #8A8D91)" /* Gold to Wing Grey */
     }
   ];
 
@@ -53,16 +52,15 @@ const Home = () => {
           <div className="hero-content animate-slide-up">
             <span className="badge">Siragugal Special School</span>
             <h1 className="hero-title">
-              Empowering <br />
-              <span className="text-highlight">Every Child</span> <br />
-              to Shine
+              Helping Every Child <br />
+              <span className="text-highlight">Learn, Grow & Shine</span>
             </h1>
             <p className="hero-description">
               Siragugal is a specialized initiative of the PEACE TRUST. Since 2007, we have dedicated our care to children with Autism, ADHD, Intellectual Disabilities, Down Syndrome, and Speech Delays in Tamil Nadu, India.
             </p>
             <div className="hero-ctas">
-              <Link to="/about" className="btn-primary">Learn About Us &rarr;</Link>
-              <Link to="/donation" className="btn-secondary">Sponsor a Child</Link>
+              <Link to="/donation" className="btn-primary">Donate Now</Link>
+              <Link to="/about" className="btn-secondary">Learn More</Link>
             </div>
           </div>
 
@@ -148,8 +146,8 @@ const Home = () => {
             <h2>Support Our Mission</h2>
             <p>Every contribution, big or small, helps us provide special therapy, nutritious meals, and quality rehabilitation to children in need.</p>
             <div className="cta-actions">
-              <Link to="/donation" className="btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-primary)' }}>Donate Now</Link>
-              <Link to="/contact" className="btn-secondary" style={{ color: '#FFFFFF', borderColor: 'rgba(255,255,255,0.4)', background: 'transparent' }}>Get in Touch</Link>
+              <Link to="/donation" className="btn-primary" style={{ background: '#FFFFFF', color: 'var(--color-accent)', boxShadow: 'none' }}>Donate Now</Link>
+              <Link to="/contact" className="btn-secondary" style={{ color: '#FFFFFF', borderColor: 'var(--color-white)', background: 'transparent' }}>Get in Touch</Link>
             </div>
           </div>
         </div>
