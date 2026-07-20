@@ -36,7 +36,6 @@ const Contact = () => {
     e.preventDefault();
     if (validate()) {
       setSubmitted(true);
-      // Mock submit
       console.log("Contact Form Submitted Successfully: ", formData);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
@@ -204,16 +203,96 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map placeholder */}
-      <section className="map-section section-padding">
+      {/* Redesigned Locate Our Center Map & Information Section */}
+      <section className="map-section section-padding-custom">
         <div className="contact-container">
           <h2 className="section-title">Locate Our Center</h2>
-          <p className="section-subtitle">Map coordinates in Sivaji Nagar, Membalam, Thanjavur.</p>
-          <div className="map-placeholder-card glass-card">
-            <div className="map-mock-visual">
-              <span>📍 Google Map Visual Integration (Coming Soon)</span>
-              <p>No.23, Sivaji Nagar, Membalam, Thanjavur, Tamil Nadu, India.</p>
+          <div className="heading-divider center"></div>
+          <p className="section-subtitle">Find us at Sivaji Nagar, Membalam, Thanjavur.</p>
+          
+          {/* Live Interactive Map */}
+          <div className="map-frame-wrapper">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2312678685117!2d79.12846071480074!3d10.780509492318859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab8bf5306b201%3A0xa38d7350b310c43c!2sSpecial%20School-Siragugal!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="480" 
+              style={{ border: 0 }} 
+              allowFullScreen="" 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Siragugal Special School Location Map"
+            ></iframe>
+          </div>
+
+          {/* Location Information Cards */}
+          <div className="location-info-grid">
+            {/* Card 1: Address */}
+            <div className="location-card-custom glass-card">
+              <div className="location-card-header-custom">
+                <span className="location-card-icon">📍</span>
+                <h3>Address</h3>
+              </div>
+              <div className="location-card-body-custom">
+                <p className="bold-text">PEACE TRUST – Siragugal Special School</p>
+                <p>No.23, Shivaji Nagar Main Road</p>
+                <p>Membalam</p>
+                <p>Thanjavur – 613001</p>
+                <p>Tamil Nadu</p>
+                <p>India</p>
+              </div>
             </div>
+
+            {/* Card 2: Contact */}
+            <div className="location-card-custom glass-card">
+              <div className="location-card-header-custom">
+                <span className="location-card-icon">📞</span>
+                <h3>Contact</h3>
+              </div>
+              <div className="location-card-body-custom fields-stack">
+                <div className="field-block">
+                  <span className="field-label-custom">Phone:</span>
+                  <span className="field-line-custom">____________________</span>
+                </div>
+                <div className="field-block">
+                  <span className="field-label-custom">Email:</span>
+                  <span className="field-line-custom">____________________</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Working Hours */}
+            <div className="location-card-custom glass-card">
+              <div className="location-card-header-custom">
+                <span className="location-card-icon">🕒</span>
+                <h3>Working Hours</h3>
+              </div>
+              <div className="location-card-body-custom hours-stack">
+                <div className="hour-row">
+                  <span className="hour-day">Monday – Friday</span>
+                  <span className="hour-time">9:00 AM – 5:00 PM</span>
+                </div>
+                <div className="hour-row">
+                  <span className="hour-day">Saturday</span>
+                  <span className="hour-time">9:00 AM – 1:00 PM</span>
+                </div>
+                <div className="hour-row">
+                  <span className="hour-day">Sunday</span>
+                  <span className="hour-time closed-text">Closed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Get Directions Action Button */}
+          <div className="directions-cta-wrapper">
+            <a 
+              href="https://www.google.com/maps/dir//Special+School-Siragugal,+23,+Shivaji+Nagar+Main+Rd,+Membalam,+Thanjavur,+Tamil+Nadu+613001/@10.8050023,78.6682389,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3baab8bf5306b201:0xa38d7350b310c43c!2m2!1d79.1306494!2d10.7805095?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D" 
+              className="btn-primary directions-btn"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              📍 Get Directions
+            </a>
           </div>
         </div>
       </section>
@@ -222,7 +301,6 @@ const Contact = () => {
       <section className="faq-section section-padding">
         <div className="contact-container">
           <h2 className="section-title">Frequently Asked Questions</h2>
-          <p className="section-subtitle">Common queries from parents, donors, and internship candidates.</p>
           <div className="faq-list">
             {faqs.map((faq, idx) => (
               <div key={idx} className="faq-item glass-card">
