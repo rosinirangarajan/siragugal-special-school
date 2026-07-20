@@ -10,13 +10,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -25,13 +20,22 @@ const Navbar = () => {
     setIsOpen(false);
   }, [location]);
 
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/activities', label: 'Activities' },
+    { to: '/courses', label: 'Courses' },
+    { to: '/donation', label: 'Donation' },
+    { to: '/contact', label: 'Contact' },
+  ];
+
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Main navigation">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo-container">
+        <Link to="/" className="navbar-logo-container" aria-label="Siragugal Special School — Home">
           <img
             src={logoImg}
-            alt="Siragugal Special School Logo"
+            alt="Siragugal Special School logo"
             className="navbar-logo-img"
           />
           <div className="navbar-title-wrapper">
@@ -42,12 +46,17 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="nav-menu">
-          <li><NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
-          <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink></li>
-          <li><NavLink to="/activities" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Activities</NavLink></li>
-          <li><NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Courses</NavLink></li>
-          <li><NavLink to="/donation" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Donation</NavLink></li>
-          <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Contact</NavLink></li>
+          {navLinks.map((link) => (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         <div className="navbar-cta-desktop">
@@ -55,7 +64,12 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Hamburger */}
-        <button className={`hamburger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+        <button
+          className={`hamburger ${isOpen ? 'active' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -63,16 +77,19 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`nav-menu-mobile ${isOpen ? 'open' : ''}`}>
+      <div className={`nav-menu-mobile ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>
         <ul className="nav-links-mobile">
-          <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
-          <li><Link to="/about" onClick={() => setIsOpen(false)}>About Us</Link></li>
-          <li><Link to="/activities" onClick={() => setIsOpen(false)}>Activities</Link></li>
-          <li><Link to="/courses" onClick={() => setIsOpen(false)}>Courses & Programs</Link></li>
-          <li><Link to="/donation" onClick={() => setIsOpen(false)}>Donation</Link></li>
-          <li><Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
+          {navLinks.map((link) => (
+            <li key={link.to}>
+              <Link to={link.to} onClick={() => setIsOpen(false)}>
+                {link.label === 'Courses' ? 'Courses & Programs' : link.label}
+              </Link>
+            </li>
+          ))}
           <li className="mobile-cta-item">
-            <Link to="/donation" className="nav-donate-btn mobile" onClick={() => setIsOpen(false)}>Donate Now</Link>
+            <Link to="/donation" className="nav-donate-btn mobile" onClick={() => setIsOpen(false)}>
+              Donate Now
+            </Link>
           </li>
         </ul>
       </div>

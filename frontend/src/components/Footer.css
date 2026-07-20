@@ -1,13 +1,17 @@
+/* ═══════════════════════════════════════════════════════
+   FOOTER — Refined Polish
+   ═══════════════════════════════════════════════════════ */
+
 .footer {
-  background: #1E1E1E; /* Ink Text color as dark background */
-  color: #8A8D91;     /* Wing Grey text */
-  padding-top: 80px;
+  background: #1E1E1E;
+  color: #8A8D91;
+  padding-top: 88px;
   font-size: 0.95rem;
 }
 
 .footer-top {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 .footer-container {
@@ -16,37 +20,33 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 40px;
+  gap: 48px;
 }
 
+/* ── Brand Column ─────────────────────────────────────── */
 .footer-brand-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-.footer-logo .logo-icon {
-  background-color: var(--color-accent); /* Accent Red logo badge */
-  color: var(--color-white);
-  font-weight: 700;
-  font-size: 1.4rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.footer-logo-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .logo-text h3 {
   color: var(--color-white);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -55,26 +55,28 @@
   font-size: 0.7rem;
   letter-spacing: 1px;
   font-weight: 600;
-  color: var(--color-gold); /* Accent Gold */
+  color: var(--color-gold);
+  margin-top: 2px;
 }
 
 .brand-description {
-  line-height: 1.7;
+  line-height: 1.75;
   color: #cccccc;
 }
 
 .established-tag {
   font-size: 0.8rem;
-  color: var(--color-gold); /* Accent Gold */
+  color: var(--color-gold);
   font-weight: 500;
 }
 
+/* ── Links Columns ────────────────────────────────────── */
 .footer-links-column h4,
 .footer-contact-column h4 {
   color: var(--color-white);
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   position: relative;
 }
 
@@ -84,51 +86,92 @@
   display: block;
   width: 30px;
   height: 2px;
-  background-color: var(--color-gold); /* Accent Gold rule line */
-  margin-top: 8px;
+  background-color: var(--color-gold);
+  margin-top: 10px;
 }
 
 .footer-links-column ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .footer-links-column ul a {
-  transition: var(--transition-smooth);
+  transition: color 0.3s ease, padding-left 0.3s ease;
   color: #cccccc;
 }
 
 .footer-links-column ul a:hover {
-  color: var(--color-gold); /* gold on hover */
+  color: var(--color-gold);
   padding-left: 5px;
 }
 
 .admin-link {
   font-weight: 500;
-  color: var(--color-accent) !important; /* Accent Red */
+  color: var(--color-accent) !important;
 }
 
+/* ── Contact Column ───────────────────────────────────── */
 .footer-contact-column address {
   font-style: normal;
   line-height: 1.7;
-  color: var(--color-bg); /* Off white address text */
-  margin-bottom: 20px;
+  color: var(--color-bg);
 }
 
 .contact-details-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.contact-icon {
+  color: var(--color-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+}
+
+.contact-icon svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 
 .contact-details-list strong {
   color: var(--color-white);
+  display: block;
+  margin-bottom: 3px;
 }
 
+.contact-details-list p {
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.footer-email-link {
+  color: var(--color-gold);
+  transition: color 0.25s ease;
+}
+
+.footer-email-link:hover {
+  color: var(--color-white);
+}
+
+/* ── Bottom Bar ───────────────────────────────────────── */
 .footer-bottom {
-  padding: 30px 0;
+  padding: 32px 0;
   background: #151515;
 }
 
@@ -149,31 +192,51 @@
 
 .footer-social-links {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   font-size: 0.8rem;
 }
 
 .social-placeholder {
   background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--border-radius-sm);
   color: var(--color-gold);
+  transition: background 0.3s ease;
 }
 
+.social-placeholder:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 992px) {
   .footer-container {
     grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
 }
 
 @media (max-width: 576px) {
+  .footer {
+    padding-top: 64px;
+  }
+
+  .footer-top {
+    padding-bottom: 44px;
+  }
+
   .footer-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 36px;
   }
-  
+
   .footer-bottom-container {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer-social-links {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

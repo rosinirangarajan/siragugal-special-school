@@ -1,48 +1,20 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-// Hero images
+/* ── Asset Imports ────────────────────────────────────── */
 import birdParkImg from '../assets/hero/bird-park.jpeg';
 import emojiDayImg from '../assets/hero/emoji-day.jpeg';
 import independenceDayImg from '../assets/hero/independence-day.jpeg';
 import scienceExhibitionImg from '../assets/hero/science-exhibition.jpeg';
-
-// School building
 import schoolBuildingImg from '../assets/home/school-building.jpeg';
 
+/* ── Data Arrays ──────────────────────────────────────── */
 const heroImages = [
-  { src: birdParkImg, alt: 'Students enjoying a trip to Bird Park' },
-  { src: emojiDayImg, alt: 'Children celebrating Emoji Day with creative expressions' },
-  { src: independenceDayImg, alt: 'Independence Day celebration at Siragugal' },
-  { src: scienceExhibitionImg, alt: 'Students showcasing projects at Science Exhibition' },
-];
-
-const lifeAtSiragugalCards = [
-  {
-    src: birdParkImg,
-    alt: 'Bird Park field trip',
-    title: 'Bird Park',
-    caption: 'Learning Beyond Classrooms',
-  },
-  {
-    src: emojiDayImg,
-    alt: 'Emoji Day celebration',
-    title: 'Emoji Day',
-    caption: 'Celebrating Expression',
-  },
-  {
-    src: scienceExhibitionImg,
-    alt: 'Science Exhibition display',
-    title: 'Science Exhibition',
-    caption: 'Curiosity in Action',
-  },
-  {
-    src: independenceDayImg,
-    alt: 'Independence Day event',
-    title: 'Independence Day',
-    caption: 'Growing Together',
-  },
+  { src: birdParkImg, alt: 'Students on a field trip to Bird Park' },
+  { src: emojiDayImg, alt: 'Children celebrating Emoji Day' },
+  { src: independenceDayImg, alt: 'Independence Day celebration at school' },
+  { src: scienceExhibitionImg, alt: 'Students at the Science Exhibition' },
 ];
 
 const stats = [
@@ -59,8 +31,34 @@ const facilities = [
   { title: 'Rehabilitation Centre', desc: 'Complete support infrastructure for physical needs.' },
 ];
 
-/* ── Animated Counter Hook ───────────────────────────── */
-function useCountUp(target, duration = 2000, shouldStart = false) {
+const lifeCards = [
+  { src: birdParkImg, alt: 'Bird Park field trip', title: 'Bird Park', caption: 'Learning Beyond Classrooms' },
+  { src: emojiDayImg, alt: 'Emoji Day celebration', title: 'Emoji Day', caption: 'Celebrating Expression' },
+  { src: scienceExhibitionImg, alt: 'Science Exhibition', title: 'Science Exhibition', caption: 'Curiosity in Action' },
+  { src: independenceDayImg, alt: 'Independence Day', title: 'Independence Day', caption: 'Growing Together' },
+];
+
+/* ── Intersection Observer Hook ───────────────────────── */
+function useOnScreen(options = { threshold: 0.2 }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, options);
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return [ref, visible];
+}
+
+/* ── Animated Counter ─────────────────────────────────── */
+function useCountUp(target, duration = 1600, shouldStart = false) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -78,7 +76,6 @@ function useCountUp(target, duration = 2000, shouldStart = false) {
         raf = requestAnimationFrame(step);
       }
     };
-
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [target, duration, shouldStart]);
@@ -86,73 +83,37 @@ function useCountUp(target, duration = 2000, shouldStart = false) {
   return count;
 }
 
-/* ── Stat Card with Counter ──────────────────────────── */
-const StatCard = ({ number, label, suffix }) => {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+/* ── Fade-in Wrapper ──────────────────────────────────── */
+const FadeIn = ({ children, className = '', delay = 0, as: Tag = 'div' }) => {
+  const [ref, visible] = useOnScreen({ threshold: 0.15 });
+  return (
+    <Tag
+      ref={ref}
+      className={`fade-in ${visible ? 'is-visible' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </Tag>
+  );
+};
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.4 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const animatedValue = useCountUp(number, 1800, visible);
+/* ── Stat Card ────────────────────────────────────────── */
+const StatCard = ({ number, label, suffix, delay }) => {
+  const [ref, visible] = useOnScreen({ threshold: 0.4 });
+  const animatedValue = useCountUp(number, 1600, visible);
 
   return (
-    <div ref={ref} className="stat-card glass-card fade-in-element">
-      <h2 className="stat-number">
-        {animatedValue}
-        {suffix}
-      </h2>
+    <div ref={ref} className={`stat-card glass-card fade-in ${visible ? 'is-visible' : ''}`} style={{ transitionDelay: `${delay}ms` }}>
+      <h2 className="stat-number">{animatedValue}{suffix}</h2>
       <p className="stat-label">{label}</p>
     </div>
   );
 };
 
-/* ── Fade-in on scroll wrapper ───────────────────────── */
-const FadeInSection = ({ children, className = '', delay = 0 }) => {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`${className} fade-in-element ${visible ? 'is-visible' : ''}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-};
-
 /* ══════════════════════════════════════════════════════
-   HOME COMPONENT
+   HOME PAGE
    ══════════════════════════════════════════════════════ */
 const Home = () => {
-  /* ── Hero Image Slider ─────────────────────────────── */
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
@@ -164,7 +125,8 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* ─── Hero Section ────────────────────────────── */}
+
+      {/* ── Hero ──────────────────────────────────────── */}
       <section className="hero-section" aria-label="Welcome to Siragugal">
         <div className="hero-container">
           <div className="hero-content animate-slide-up">
@@ -179,35 +141,31 @@ const Home = () => {
               Disabilities, Down Syndrome, and Speech Delays in Tamil&nbsp;Nadu,&nbsp;India.
             </p>
             <div className="hero-ctas">
-              <Link to="/donation" className="btn-primary">
-                Donate Now
-              </Link>
-              <Link to="/about" className="btn-secondary">
-                Learn More
-              </Link>
+              <Link to="/donation" className="btn-primary">Donate Now</Link>
+              <Link to="/about" className="btn-secondary">Learn More</Link>
             </div>
           </div>
 
-          {/* Image Slider */}
-          <div className="hero-slider-wrapper" aria-label="School activity slideshow">
+          <div className="hero-slider-wrapper" aria-label="School activity photos">
             <div className="hero-image-slider">
-              {heroImages.map((img, index) => (
+              {heroImages.map((img, i) => (
                 <img
-                  key={index}
+                  key={i}
                   src={img.src}
                   alt={img.alt}
-                  className={`hero-slide-img ${index === activeSlide ? 'active' : ''}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
+                  className={`hero-slide-img ${i === activeSlide ? 'active' : ''}`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
                 />
               ))}
-              {/* Pagination Dots */}
-              <div className="hero-dots">
-                {heroImages.map((_, index) => (
+              <div className="hero-dots" role="tablist" aria-label="Slideshow controls">
+                {heroImages.map((_, i) => (
                   <button
-                    key={index}
-                    className={`hero-dot ${index === activeSlide ? 'active' : ''}`}
-                    onClick={() => setActiveSlide(index)}
-                    aria-label={`Go to slide ${index + 1}`}
+                    key={i}
+                    role="tab"
+                    aria-selected={i === activeSlide}
+                    className={`hero-dot ${i === activeSlide ? 'active' : ''}`}
+                    onClick={() => setActiveSlide(i)}
+                    aria-label={`Show photo ${i + 1}`}
                   />
                 ))}
               </div>
@@ -216,106 +174,97 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ─── Stats Counter Section ───────────────────── */}
+      {/* ── Statistics ────────────────────────────────── */}
       <section className="stats-section" aria-label="Key statistics">
         <div className="stats-container">
-          {stats.map((stat, idx) => (
-            <StatCard key={idx} number={stat.number} label={stat.label} suffix={stat.suffix} />
+          {stats.map((s, i) => (
+            <StatCard key={i} number={s.number} label={s.label} suffix={s.suffix} delay={i * 80} />
           ))}
         </div>
       </section>
 
-      {/* ─── Who We Are ──────────────────────────────── */}
+      {/* ── Who We Are ────────────────────────────────── */}
       <section className="intro-preview section-padding" aria-label="About Siragugal">
         <div className="intro-container">
-          <FadeInSection className="intro-text-block">
+          <FadeIn className="intro-text-block">
             <span className="section-label">Who We Are</span>
-            <h2 className="intro-title">
-              Inclusive Education &amp; Care for Exceptional Minds
-            </h2>
+            <h2 className="intro-title">Inclusive Education &amp; Care for Exceptional Minds</h2>
             <p>
-              Under the parent organization{' '}
-              <strong>PEACE TRUST</strong> (Promote Exceptionals And Create
-              Evolution Trust), Siragugal has built branches across{' '}
-              <strong>Thanjavur</strong>, <strong>Pattukottai</strong>, and our
-              newly opened branch in <strong>Kumbakonam</strong>. We target
-              cognitive, emotional, and social parameters using individual
-              support programs.
+              Under the parent organization <strong>PEACE TRUST</strong> (Promote
+              Exceptionals And Create Evolution Trust), Siragugal has built branches
+              across <strong>Thanjavur</strong>, <strong>Pattukottai</strong>, and
+              our newly opened branch in <strong>Kumbakonam</strong>. We target
+              cognitive, emotional, and social parameters using individual support
+              programs.
             </p>
             <Link to="/about" className="btn-secondary" style={{ marginTop: '8px' }}>
               Read Our Story
             </Link>
-          </FadeInSection>
+          </FadeIn>
 
-          <FadeInSection className="intro-image-block" delay={200}>
+          <FadeIn className="intro-image-block" delay={150}>
             <img
               src={schoolBuildingImg}
-              alt="Siragugal Special School campus building"
+              alt="Siragugal Special School campus"
               className="intro-school-img"
             />
-          </FadeInSection>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ─── Facilities Section ──────────────────────── */}
+      {/* ── Facilities ────────────────────────────────── */}
       <section className="facilities-section section-padding" aria-label="Our facilities">
         <div className="container">
           <h2 className="section-title">Our Facilities</h2>
           <p className="section-subtitle">
-            A nurturing and fully equipped infrastructure supporting
-            developmental growth.
+            A nurturing and fully equipped infrastructure supporting developmental growth.
           </p>
           <div className="facilities-grid">
-            {facilities.map((fac, idx) => (
-              <FadeInSection key={idx} delay={idx * 100}>
-                <div className="facility-card glass-card glass-card-hover">
+            {facilities.map((fac, i) => (
+              <FadeIn key={i} delay={i * 100}>
+                <div className="facility-card glass-card">
                   <div className="facility-icon" aria-hidden="true">✓</div>
                   <h3>{fac.title}</h3>
                   <p>{fac.desc}</p>
                 </div>
-              </FadeInSection>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Life at Siragugal ───────────────────────── */}
+      {/* ── Life at Siragugal ─────────────────────────── */}
       <section className="life-section section-padding" aria-label="Life at Siragugal">
         <div className="container">
-          <FadeInSection>
-            <span className="section-label" style={{ textAlign: 'center', display: 'block' }}>
-              Gallery
-            </span>
+          <FadeIn>
+            <span className="section-label life-label">Gallery</span>
             <h2 className="section-title">Life at Siragugal</h2>
             <p className="section-subtitle">
-              Every smile, every activity, and every milestone reflects a journey
-              of growth, care, and belonging.
+              Every smile, every activity, and every milestone reflects a journey of growth, care, and belonging.
             </p>
-          </FadeInSection>
+          </FadeIn>
 
           <div className="life-grid">
-            {lifeAtSiragugalCards.map((card, idx) => (
-              <FadeInSection key={idx} className="life-card" delay={idx * 120}>
-                <div className="life-card-inner">
+            {lifeCards.map((card, i) => (
+              <FadeIn key={i} className="life-card-wrapper" delay={i * 100}>
+                <div className="life-card">
                   <img src={card.src} alt={card.alt} loading="lazy" />
                   <div className="life-card-overlay">
                     <h4>{card.title}</h4>
                     <p>{card.caption}</p>
                   </div>
                 </div>
-              </FadeInSection>
+              </FadeIn>
             ))}
           </div>
 
-          <div className="life-cta">
-            <Link to="/gallery" className="btn-secondary">
-              View Full Gallery
-            </Link>
-          </div>
+          <FadeIn className="life-cta" delay={200}>
+            <Link to="/gallery" className="btn-secondary">View Full Gallery</Link>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ─── Donation Banner Section ─────────────────── */}
+      {/* ── Support / Donation Banner ─────────────────── */}
       <section className="cta-banner-section" aria-label="Support our mission">
         <div className="cta-banner-card">
           <div className="cta-banner-content">
@@ -328,22 +277,14 @@ const Home = () => {
               <Link
                 to="/donation"
                 className="btn-primary"
-                style={{
-                  background: '#FFFFFF',
-                  color: 'var(--color-accent)',
-                  boxShadow: 'none',
-                }}
+                style={{ background: '#FFFFFF', color: 'var(--color-accent)', boxShadow: 'none' }}
               >
                 Donate Now
               </Link>
               <Link
                 to="/contact"
                 className="btn-secondary"
-                style={{
-                  color: '#FFFFFF',
-                  borderColor: 'var(--color-white)',
-                  background: 'transparent',
-                }}
+                style={{ color: '#FFFFFF', borderColor: 'var(--color-white)', background: 'transparent' }}
               >
                 Get in Touch
               </Link>
@@ -351,6 +292,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
     </div>
   );
 };
