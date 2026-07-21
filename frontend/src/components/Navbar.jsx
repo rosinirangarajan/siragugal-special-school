@@ -25,7 +25,7 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo-container">
           <div className="navbar-logo-icon">S</div>
@@ -37,20 +37,81 @@ const Navbar = () => {
 
         {/* Desktop Menu - Keep only required pages */}
         <ul className="nav-menu">
-          <li><NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
-          <li><NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About</NavLink></li>
-          <li><NavLink to="/activities" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Activities</NavLink></li>
-          <li><NavLink to="/courses" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Courses</NavLink></li>
-          <li><NavLink to="/donation" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Donation</NavLink></li>
-          <li><NavLink to="/contact" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Contact</NavLink></li>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/activities"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Activities
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              {" "}
+              Services
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/donation"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Donation
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              Contact
+            </NavLink>
+          </li>
         </ul>
 
         <div className="navbar-cta-desktop">
-          <Link to="/donation" className="nav-donate-btn">Donate Now</Link>
+          <Link to="/donation" className="nav-donate-btn">
+            Donate Now
+          </Link>
         </div>
 
         {/* Mobile Hamburger */}
-        <button className={`hamburger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+        <button
+          className={`hamburger ${isOpen ? "active" : ""}`}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -58,16 +119,46 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`nav-menu-mobile ${isOpen ? 'open' : ''}`}>
+      <div className={`nav-menu-mobile ${isOpen ? "open" : ""}`}>
         <ul className="nav-links-mobile">
-          <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
-          <li><Link to="/about" onClick={() => setIsOpen(false)}>About Us</Link></li>
-          <li><Link to="/activities" onClick={() => setIsOpen(false)}>Activities</Link></li>
-          <li><Link to="/courses" onClick={() => setIsOpen(false)}>Courses & Programs</Link></li>
-          <li><Link to="/donation" onClick={() => setIsOpen(false)}>Donation</Link></li>
-          <li><Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
+          <li>
+            <Link to="/" onClick={() => setIsOpen(false)}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" onClick={() => setIsOpen(false)}>
+              About Us
+            </Link>
+          </li>
+          <li>
+            <Link to="/activities" onClick={() => setIsOpen(false)}>
+              Activities
+            </Link>
+          </li>
+          <li>
+            <Link to="/courses" onClick={() => setIsOpen(false)}>
+              Courses & Programs
+            </Link>
+          </li>
+          <li>
+            <Link to="/donation" onClick={() => setIsOpen(false)}>
+              Donation
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={() => setIsOpen(false)}>
+              Contact
+            </Link>
+          </li>
           <li className="mobile-cta-item">
-            <Link to="/donation" className="nav-donate-btn mobile" onClick={() => setIsOpen(false)}>Donate Now</Link>
+            <Link
+              to="/donation"
+              className="nav-donate-btn mobile"
+              onClick={() => setIsOpen(false)}
+            >
+              Donate Now
+            </Link>
           </li>
         </ul>
       </div>
