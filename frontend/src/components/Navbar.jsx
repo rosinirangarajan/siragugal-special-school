@@ -24,7 +24,7 @@ const Navbar = () => {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/activities', label: 'Activities' },
-    { to: '/courses', label: 'Courses' },
+    { to: '/services', label: 'Services' },
     { to: '/donation', label: 'Donation' },
     { to: '/contact', label: 'Contact' },
   ];
@@ -82,7 +82,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <li key={link.to}>
               <Link to={link.to} onClick={() => setIsOpen(false)}>
-                {link.label === 'Courses' ? 'Courses & Programs' : link.label}
+                {link.label}
               </Link>
             </li>
           ))}

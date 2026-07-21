@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Activities from './pages/Activities';
 import Staff from './pages/Staff';
-import Courses from './pages/Courses';
+import Services from './pages/Services';
 import Gallery from './pages/Gallery';
 import Donation from './pages/Donation';
 import Contact from './pages/Contact';
@@ -23,7 +23,7 @@ function App() {
         <Route path="/about" element={<MainLayout><About /></MainLayout>} />
         <Route path="/activities" element={<MainLayout><Activities /></MainLayout>} />
         <Route path="/staff" element={<MainLayout><Staff /></MainLayout>} />
-        <Route path="/courses" element={<MainLayout><Courses /></MainLayout>} />
+        <Route path="/services" element={<MainLayout><Services /></MainLayout>} />
         <Route path="/gallery" element={<MainLayout><Gallery /></MainLayout>} />
         <Route path="/donation" element={<MainLayout><Donation /></MainLayout>} />
         <Route path="/contact" element={<MainLayout><Contact /></MainLayout>} />
